@@ -1,0 +1,262 @@
+body {
+    font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    margin: 0;
+    transition: background-color 0.8s ease-in-out; /* Transição mais longa para a mudança de cor */
+    color: #e0e6f0; /* Cor de texto padrão clara */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
+
+/* Efeito de partícula de fundo (Opcional, para um visual mais complexo) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(0, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.1) 0%, transparent 40%);
+    pointer-events: none; /* Não interfere com cliques */
+    z-index: -1; /* Fica atrás do conteúdo */
+}
+
+
+.container {
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo branco muito sutilmente transparente (glassmorphism base) */
+    backdrop-filter: blur(15px); /* Efeito de vidro fosco */
+    border-radius: 20px; /* Mais arredondado */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil para o efeito de vidro */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Sombra mais forte para profundidade */
+    padding: 40px; /* Mais preenchimento */
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+    position: relative; /* Para z-index se necessário */
+    z-index: 1;
+}
+
+h1 {
+    color: #00e6e6; /* Ciano vibrante para o título */
+    margin-bottom: 30px;
+    font-size: 3em; /* Título maior */
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6); /* Sombra de texto neon */
+    font-weight: 700;
+}
+
+.input-section {
+    display: flex;
+    gap: 15px; /* Mais espaçamento */
+    margin-bottom: 30px;
+}
+
+#taskInput {
+    flex-grow: 1;
+    padding: 15px 20px; /* Mais padding */
+    border: 2px solid rgba(0, 255, 255, 0.5); /* Borda ciano sutil */
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo input quase transparente */
+    color: #e0e6f0; /* Cor do texto no input */
+    border-radius: 10px; /* Mais arredondado */
+    font-size: 1.1em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#taskInput::placeholder {
+    color: rgba(224, 230, 240, 0.6); /* Placeholder mais sutil */
+}
+
+#taskInput:focus {
+    border-color: #00ffff; /* Borda ciano mais forte ao focar */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8); /* Brilho neon ao focar */
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo input um pouco mais visível */
+}
+
+button {
+    background: linear-gradient(45deg, #00c6ff, #0072ff); /* Gradiente azul vibrante */
+    color: white;
+    border: none;
+    padding: 15px 25px; /* Mais padding */
+    border-radius: 10px; /* Mais arredondado */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 198, 255, 0.4); /* Sombra com brilho */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #00aaff, #0056e6); /* Gradiente mais escuro ao hover */
+    transform: translateY(-3px) scale(1.02); /* Efeito de "levantar" e expandir um pouco */
+    box-shadow: 0 6px 15px rgba(0, 198, 255, 0.6);
+}
+
+button:active {
+    transform: translateY(0) scale(0.98); /* Volta ao normal e encolhe levemente ao clicar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #0088cc, #0033aa); /* Gradiente ainda mais escuro */
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0; /* Mais espaçamento */
+}
+
+#taskList li {
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo do item de lista semi-transparente */
+    backdrop-filter: blur(8px); /* Efeito de vidro fosco no item */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    padding: 18px 25px; /* Mais padding */
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.15em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease-in-out;
+    position: relative; /* Para o efeito de sublinhado */
+    overflow: hidden; /* Garante que o gradiente não vaze */
+}
+
+#taskList li::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px; /* Espessura do sublinhado */
+    background: linear-gradient(90deg, #00ffff, #ff00ff); /* Gradiente neon */
+    transition: width 0.3s ease-out;
+}
+
+#taskList li:hover::before {
+    width: 100%; /* Expande o sublinhado ao passar o mouse */
+}
+
+
+#taskList li.completed {
+    background-color: rgba(255, 255, 255, 0.02); /* Mais transparente para concluído */
+    text-decoration: line-through;
+    color: rgba(224, 230, 240, 0.5); /* Texto mais sutil */
+    opacity: 0.8;
+    border-color: rgba(0, 255, 0, 0.3); /* Borda verde suave para concluído */
+}
+/* Remove o sublinhado ao passar o mouse para tarefas concluídas */
+#taskList li.completed:hover::before {
+    width: 0;
+}
+
+
+#taskList li span {
+    flex-grow: 1;
+    text-align: left;
+    cursor: pointer;
+    padding-right: 15px; /* Espaçamento para botões */
+}
+
+#taskList li .task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+#taskList li .task-actions .delete-btn {
+    background: linear-gradient(45deg, #ff416c, #ff4b2b); /* Gradiente vermelho/laranja */
+    padding: 10px 15px; /* Mais padding */
+    font-size: 0.95em;
+    box-shadow: 0 2px 8px rgba(255, 65, 108, 0.4);
+}
+
+#taskList li .task-actions .delete-btn:hover {
+    background: linear-gradient(45deg, #e6375f, #e03b22);
+    box-shadow: 0 4px 12px rgba(255, 65, 108, 0.6);
+}
+#taskList li .task-actions .delete-btn:active {
+    background: linear-gradient(45deg, #cc2e52, #c02f1a);
+}
+
+
+.theme-section {
+    margin-top: 30px;
+}
+
+#changeThemeBtn {
+    background: linear-gradient(45deg, #8a2be2, #4b0082); /* Gradiente roxo */
+    padding: 15px 30px; /* Mais padding */
+    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.4);
+}
+
+#changeThemeBtn:hover {
+    background: linear-gradient(45deg, #7a1fd1, #3a006a);
+    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.6);
+}
+#changeThemeBtn:active {
+    background: linear-gradient(45deg, #6a1aab, #2a004a);
+}
+
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        border-radius: 15px;
+    }
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    #taskInput {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+    button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+    #taskList li {
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+    #taskList li .task-actions .delete-btn {
+        padding: 7px 10px;
+        font-size: 0.85em;
+    }
+    #changeThemeBtn {
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #taskInput {
+        margin-bottom: 0; /* Remove a margem extra em telas pequenas */
+        width: 100%; /* Garante que o input ocupe a largura total */
+    }
+    button {
+        width: 100%;
+    }
+    #taskList li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    #taskList li span {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    #taskList li .task-actions {
+        width: 100%;
+        justify-content: flex-end; /* Alinha botões de ação à direita */
+    }
+}
