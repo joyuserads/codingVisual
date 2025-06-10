@@ -1,0 +1,169 @@
+
+body {
+    font-family: 'Roboto Mono', monospace; /* Fonte monoespaçada para um toque de código */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d1a26; /* Fundo azul escuro profundo */
+    margin: 0;
+    overflow: hidden;
+    color: #e0e6ec; /* Cor de texto padrão para o body */
+}
+
+.calculator {
+    background-color: #1a2a3a; /* Fundo da calculadora azul escuro com subtom */
+    border-radius: 12px; /* Bordas levemente arredondadas */
+    box-shadow: 0 0 50px rgba(0, 191, 255, 0.3), /* Brilho azul elétrico sutil */
+                0 0 20px rgba(0, 191, 255, 0.15),
+                inset 0 0 15px rgba(0, 191, 255, 0.05); /* Brilho interno para profundidade */
+    width: 340px; /* Um pouco mais larga */
+    padding: 30px; /* Mais preenchimento */
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 22px; /* Espaçamento entre display e botões */
+    border: 2px solid #00bfff; /* Borda robusta azul elétrico */
+    opacity: 0;
+    transform: translateY(-20px); /* Começa um pouco acima */
+    animation: slideInFade 1s ease-out forwards; /* Animação de entrada mais lenta */
+}
+
+/* Animação de entrada da calculadora (slide e fade) */
+@keyframes slideInFade {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.display {
+    background-color: #0a111a; /* Fundo do display bem escuro */
+    color: #00bfff; /* Texto do display azul elétrico */
+    font-size: 3.2em; /* Letra maior */
+    padding: 28px 18px; /* Preenchimento ajustado */
+    border-radius: 8px; /* Bordas arredondadas do display */
+    text-align: right;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-shadow: inset 0 0 20px rgba(0, 191, 255, 0.6); /* Brilho interno forte */
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.9); /* Sombra de texto para efeito luminoso */
+    border: 1px solid rgba(0, 191, 255, 0.4); /* Borda sutil no display */
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Espaçamento entre os botões */
+}
+
+.button {
+    background-color: #2c4155; /* Fundo dos botões em tom de azul acinzentado */
+    color: #e0e6ec; /* Cor do texto padrão dos botões */
+    font-size: 1.7em; /* Tamanho da fonte dos botões */
+    padding: 20px; /* Mais preenchimento para botões maiores */
+    border: 1px solid #00bfff; /* Borda azul elétrico em cada botão */
+    border-radius: 8px; /* Bordas arredondadas para os botões */
+    cursor: pointer;
+    transition: all 0.2s ease-out; /* Transição mais suave para hover e click */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button:hover {
+    background-color: #3a526b; /* Fundo mais claro ao passar o mouse */
+    transform: translateY(-4px); /* Efeito de "levantar" mais pronunciado */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+    color: #fff; /* Texto mais claro ao passar o mouse */
+    border-color: #66e0ff; /* Borda mais clara ao passar o mouse */
+}
+
+.button:active {
+    transform: translateY(0) scale(0.98); /* Efeito de "apertar" sutil */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: #1f3040; /* Fundo mais escuro ao clicar */
+    border-color: #00bfff; /* Volta a borda original */
+    color: #00bfff; /* Texto na cor de destaque ao clicar */
+}
+
+/* Estilos específicos para botões */
+.button.clear {
+    background-color: #8b0000; /* Vermelho escuro para "C" */
+    border-color: #ff4500; /* Borda laranja avermelhada */
+    box-shadow: 0 0 12px rgba(255, 69, 0, 0.6); /* Brilho vermelho/laranja */
+}
+.button.clear:hover {
+    background-color: #a00000;
+    border-color: #ff6347;
+    box-shadow: 0 0 18px rgba(255, 69, 0, 0.8);
+}
+.button.clear:active {
+    background-color: #6a0000;
+    border-color: #ff4500;
+    color: #ff4500;
+}
+
+.button.operator {
+    background-color: #2c4155; /* Mesma cor base dos números, mas com borda e brilho diferentes */
+    border-color: #ff8c00; /* Laranja escuro para operadores */
+    color: #ff8c00; /* Texto laranja */
+    box-shadow: 0 0 12px rgba(255, 140, 0, 0.6); /* Brilho laranja */
+}
+.button.operator:hover {
+    background-color: #3a526b;
+    border-color: #ffa000;
+    box-shadow: 0 0 18px rgba(255, 140, 0, 0.8);
+    color: #ffa000;
+}
+.button.operator:active {
+    background-color: #1f3040;
+    border-color: #ff8c00;
+    color: #ff8c00;
+}
+
+.button.equals {
+    background-color: #006400; /* Verde escuro para "=" */
+    border-color: #32cd32; /* Verde limão para borda */
+    color: #32cd32; /* Texto verde limão */
+    grid-column: span 2;
+    box-shadow: 0 0 12px rgba(50, 205, 50, 0.6); /* Brilho verde */
+}
+.button.equals:hover {
+    background-color: #007a00;
+    border-color: #76ff7a;
+    box-shadow: 0 0 18px rgba(50, 205, 50, 0.8);
+    color: #76ff7a;
+}
+.button.equals:active {
+    background-color: #004a00;
+    border-color: #32cd32;
+    color: #32cd32;
+}
+
+.button.zero {
+    grid-column: span 2;
+}
+
+.button.number {
+    border-color: #00bfff; /* Borda azul elétrico para números */
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.4); /* Brilho azul sutil para números */
+}
+.button.number:hover {
+    border-color: #66e0ff;
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+}
+.button.number:active {
+    border-color: #00bfff;
+    color: #00bfff;
+}
+
+
+/* Importar fonte do Google Fonts */
+/* Adicione esta linha no seu HTML, dentro da tag <head>:
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+*/
